@@ -13,12 +13,13 @@ class Node:
 class BinaryHeap:
     def __init__(self):
         self.data = []
+        self.comparator = lambda parent, child : parent <= child
     
     def compare(self, parent, child):
         if parent == None or child == None:
             return True
         else:
-            return parent.key <= child.key
+            return self.comparator(parent.key, child.key)
 
     def insert(self, key, value):
         index = len(self.data)
@@ -96,4 +97,3 @@ class BinaryHeap:
     
     def __repr__(self):
         return self.__str__()
-
