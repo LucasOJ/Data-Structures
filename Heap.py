@@ -29,19 +29,38 @@ class BinaryHeap:
     def heapifyUp(self, node):  
         while not self.compare(self.getParent(node), node):
             self.swap(node, self.getParent(node))
-            #print(self.getParent(node))
        
-    #def heapifyDown(self, node):
-    #    while True:
+    def heapifyDown(self, node):
+        while True:
+            leftChild = self.getLeftChild(node)
+            rightChild = self.getRightChild(node)
 
-    def extract(self, node):
+            leftNodeValid = self.compare(node, self.getLeftChild(node))
+            rightNodeValid = self.compare(node, self.getRightChild(node))
+
+            if leftChild == None:
+                break
+            elif rightChild == None and leftNodeValid:
+                break
+            elif rightChild == None and not leftNodeValid:
+                self.swap(node, leftChild)
+            elif leftNodeValid and rightNodeValid:
+                break
+            else:
+                if self.compare(leftChild, rightChild):
+                    self.swap(node, leftChild)
+                else:
+                    self.swap(node, rightChild)
+
+    def extract(self):
         root = self.data[0]
-        last = self.data.pop()
-        self.data[0] = last
+        last = self.data[-1]
+        self.swap(root, last)
+        significantNode = self.data.pop()
 
-        ##heapify down
+        self.heapifyDown(last)
 
-        return root.value
+        return significantNode.value
 
 
     def swap(self, node1, node2):
@@ -77,18 +96,4 @@ class BinaryHeap:
     
     def __repr__(self):
         return self.__str__()
-
-h = BinaryHeap()
-
-h.insert(1, "A") #1,1
-h.insert(2, "B") #1,2
-
-h.insert(4, "C") #2,1
-h.insert(5, "D") #2,2  
-h.insert(1, "E") #root
-
-print(h)
-root = h.data[0]
-print(root)
-print(h.getParent(root))
 

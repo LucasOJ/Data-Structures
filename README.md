@@ -8,7 +8,7 @@ To implement:
 - General Tree
 - Binary Tree
     - Binary Search    
-- Min/Max Heap
+- Min/Max Heap (make heapifyDown prettier)
 - Self-Balancing Tree
 - General Graph
    - Kruskal's MST
